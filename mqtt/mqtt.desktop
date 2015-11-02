@@ -1,0 +1,8 @@
+[Desktop Entry]
+_Name=mqtt
+Exec=qmlscene $@ mqtt/Main.qml
+Icon=mqtt/mqtt.png
+Terminal=false
+Type=Application
+X-Ubuntu-Touch=true
+

@@ -1,0 +1,17 @@
+{
+    "name": "mqtt.liu-xiao-guo",
+    "description": "description of mqtt",
+    "architecture": "@CLICK_ARCH@",
+    "title": "mqtt",
+    "hooks": {
+        "mqtt": {
+            "apparmor": "mqtt/mqtt.apparmor",
+            "desktop":  "mqtt/mqtt.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": "XiaoGuo, Liu <xiaoguo.liu@canonical.com>",
+    "framework" : "ubuntu-sdk-15.04"
+}
+
+
