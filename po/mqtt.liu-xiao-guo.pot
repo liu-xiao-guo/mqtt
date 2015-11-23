@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-02 17:56+0800\n"
+"POT-Creation-Date: 2015-11-23 10:53+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/liuxg/snappy/mqtt/mqtt/Main.qml:29
-#: /home/liuxg/snappy/build-mqtt-UbuntuSDK_for_armhf_GCC_ubuntu_sdk_15_04_vivid-Release/mqtt/mqtt.desktop.h:1
+#: /home/liuxg/snappy/build-mqtt-Desktop-Debug/mqtt/mqtt.desktop.h:1
 msgid "mqtt"
 msgstr ""

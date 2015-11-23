@@ -30,10 +30,12 @@ MainView {
 
         MQTT {
             id: _MQTT
-            // host: "mqtt.thingstud.io"
+//            host: "mqtt.thingstud.io"
             host: "iot.eclipse.org"
             port: 1883
             topic: "testubuntucore/counter"
+            username: "guest"
+            password: "guest"
             onMessageReceived: {;
                 _ListModel_Messages.append({"message":message});
             }

@@ -14,12 +14,14 @@ class MQTT : public QObject
     Q_PROPERTY(QString host READ host WRITE setHost NOTIFY hostChanged)
     Q_PROPERTY(int port READ port WRITE setPort NOTIFY portChanged)
     Q_PROPERTY(QString topic READ topic WRITE setTopic NOTIFY topicChanged)
+    Q_PROPERTY(QString username READ username WRITE setUsername NOTIFY usernameChanged)
+    Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 
     QString m_host;
-
     int m_port;
-
     QString m_topic;
+    QString m_username;
+    QString m_password;
 
 public:
     explicit MQTT(QObject *parent = 0);
@@ -38,6 +40,11 @@ public:
     {
         return m_topic;
     }
+
+    QString username() const;
+    QString password() const;
+    void setUsername(QString username);
+    void setPassword(QString password);
 
 signals:
 
@@ -59,6 +66,9 @@ signals:
     void unsubacked(quint16 mid);
     void pong();
     void disconnected();
+
+    void usernameChanged(QString username);
+    void passwordChanged(QString password);
 
 public slots:
 

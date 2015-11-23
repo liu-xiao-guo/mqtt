@@ -26,8 +26,8 @@ void MQTT::initializeConnection()
     }
     this->client = new QMQTT::Client(m_host, m_port);
     this->client->setClientId(QString(QUuid::createUuid().toString()));
-//    this->client->setUsername("user");
-//    this->client->setPassword("password");
+    this->client->setUsername(m_username);
+    this->client->setPassword(m_password);
     this->client->connect();
     QObject::connect(this->client, SIGNAL(received(const QMQTT::Message&)),
             this, SLOT(processReceivedMessage(const QMQTT::Message&)));
@@ -38,4 +38,31 @@ void MQTT::initializeConnection()
     QObject::connect(this->client, SIGNAL(disconnected()),
                      this, SIGNAL(disconnected()));
 }
+
+QString MQTT::username() const
+{
+    return m_username;
+}
+
+void MQTT::setUsername(QString username)
+{
+    if (m_username != username) {
+        m_username = username;
+        emit usernameChanged(username);
+    }
+}
+
+QString MQTT::password() const
+{
+    return m_password;
+}
+
+void MQTT::setPassword(QString password)
+{
+    if (m_password != password) {
+        m_password = password;
+        emit passwordChanged(password);
+    }
+}
+
 
