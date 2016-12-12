@@ -12,41 +12,36 @@ MainView {
     // Note! applicationName needs to match the "name" field of the click manifest
     applicationName: "mqtt.liu-xiao-guo"
 
-    /*
-     This property enables the application to change orientation
-     when the device is rotated. The default is false.
-    */
-    //automaticOrientation: true
-
-    // Removes the old toolbar and enables new features of the new header.
-    useDeprecatedToolbar: false
+//    anchorToKeyboard: true
 
     width: units.gu(60)
     height: units.gu(85)
 
+    MQTT {
+        id: _MQTT
+        //            host: "mqtt.thingstud.io"
+        //            host: "iot.eclipse.org"
+        //            host: "192.168.1.107"
+        host: ipaddress.text
+        port: 1883
+        topic: "hello"
+        username: "guest"
+        password: "guest"
+        onMessageReceived: {;
+            _ListModel_Messages.append({"message":message});
+        }
+        onDisconnected: {
+            _MQTT.connect();
+        }
+    }
+
+    ListModel {
+        id: _ListModel_Messages
+    }
+
     Page {
         id: page
         title: i18n.tr("mqtt")
-
-        MQTT {
-            id: _MQTT
-//            host: "mqtt.thingstud.io"
-            host: "iot.eclipse.org"
-            port: 1883
-            topic: "testubuntucore/counter"
-            username: "guest"
-            password: "guest"
-            onMessageReceived: {;
-                _ListModel_Messages.append({"message":message});
-            }
-            onDisconnected: {
-                _MQTT.connect();
-            }
-        }
-
-        ListModel {
-            id: _ListModel_Messages
-        }
 
         Rectangle {
             radius: 5
@@ -54,13 +49,21 @@ MainView {
             anchors.fill: _ListView
         }
 
+        TextField {
+            id: ipaddress
+            anchors.left: parent.left
+            anchors.right: parent.right
+            text: "192.168.1.107"
+        }
+
         ListView {
             id: _ListView
             clip: true
-            anchors.fill: parent
-            anchors.topMargin: 20
+            anchors.top: ipaddress.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.leftMargin: 20; anchors.rightMargin: 20
-            anchors.bottomMargin: 250 // This changes the things
+            anchors.bottom: _TextArea.top
             highlightMoveDuration: 450
             cacheBuffer: 10000
             model: _ListModel_Messages
@@ -87,7 +90,7 @@ MainView {
 
         Rectangle {
             anchors.fill: _TextArea
-            color: "#ffffff"
+            color: "grey"
             radius: 5
             anchors.margins: -15
         }
@@ -102,7 +105,11 @@ MainView {
             anchors.right: parent.right
             height: 140
             font.pixelSize: 50
-            Keys.onEnterPressed: _Rectangle_Submit.action();
+
+            Keys.onReturnPressed: {
+                console.log("enter is pressed!")
+                Qt.inputMethod.hide();
+             }
         }
 
         Row {
@@ -120,24 +127,6 @@ MainView {
                     _MQTT.publishMessage(_TextArea.text);
                     _TextArea.text = "";
                     Qt.inputMethod.hide();
-                }
-            }
-
-            Button {
-                id: lighton
-                text: "Light on"
-                onClicked: {
-                    console.log("Light on is clicked")
-                    _MQTT.publishMessage("on");
-                }
-            }
-
-            Button {
-                id: lightoff
-                text: "Light off"
-                onClicked: {
-                    console.log("Light off is clicked")
-                    _MQTT.publishMessage("off");
                 }
             }
         }
